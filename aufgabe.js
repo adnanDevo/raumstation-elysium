@@ -41,10 +41,7 @@ const systeme = [
         energieverbrauch: 90,
         reparaturkosten: 3500
     }]
-
-//Bonus: Budget für die Reparaturen (den Wert kannst du ändern)
 let budget = 6000
-
 let liste = document.querySelector("#liste")
 let budgetAnzeige = document.querySelector("#budgetAnzeige")
 let listeKritisch = document.querySelector("#div2")
@@ -55,21 +52,16 @@ let energiVerbrauch = document.querySelector("#div5")
 let energiBericht = document.querySelector("#div6")
 let statistik = document.querySelector("#div9")
 let tabellee = document.querySelector("#div10")
-
-//erste, fünfte und sechste Aufgabe zusammen:
-//Die Liste wird mit Farbe und Reparatur-Taste neben jeder Zeile aufgebaut
 function listeAufbauen() {
     liste.innerHTML = ""
     for (const zeil of systeme) {
         let li = document.createElement("li")
         li.textContent = "- Name: " + zeil.name + "   / Status:  " + zeil.status + "   / Kosten: " + zeil.reparaturkosten
-        //fünfte Aufgabe: Farben
         if (zeil.status == "kritisch") {
             li.style.backgroundColor = "red"
         } else if (zeil.status == "gestört") {
             li.style.backgroundColor = "orange"
         }
-        //sechste Aufgabe: Taste neben der Zeile
         let knopf = document.createElement("button")
         knopf.textContent = "reparieren"
         knopf.addEventListener("click", function () {
@@ -79,7 +71,6 @@ function listeAufbauen() {
                 budget = budget - zeil.reparaturkosten
                 zeil.status = "normal"
                 listeAufbauen()
-                //schon angezeigte Berichte auch aktualisieren
                 if (listeKritisch.children.length > 0) {
                     kritisch()
                 }
@@ -96,8 +87,6 @@ function listeAufbauen() {
     budgetAnzeige.textContent = "Budget: " + budget + " $"
 }
 listeAufbauen()
-
-//zweite Aufgabe
 buttonKritisch.addEventListener("click", kritisch)
 function kritisch() {
     listeKritisch.innerHTML = ""
@@ -109,7 +98,6 @@ function kritisch() {
     }
 }
 
-// dritte Aufgabe
 reparaturKosten.addEventListener("click", kostenBerechnen)
 function kostenBerechnen() {
     let kosten = []
@@ -119,7 +107,6 @@ function kostenBerechnen() {
     reparaturSumme.textContent = "$ " + kosten.reduce((summe, z) => summe + z, 0)
 }
 
-// Vierte Aufgabe
 energiVerbrauch.addEventListener("click", energiZeigen)
 function energiZeigen() {
     energiBericht.innerHTML = ""
@@ -131,7 +118,6 @@ function energiZeigen() {
     }
 }
 
-//siebte Aufgabe
 statistik.addEventListener("click", statistikZeigen)
 function statistikZeigen() {
     let kritischS = 0
